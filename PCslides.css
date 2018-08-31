@@ -1,0 +1,86 @@
+
+slides > slide.title-slide aside.gdbar {
+height: 100px;
+width: 350px;
+position: absolute;
+left: -1px;
+top: 125px;
+background: #78A22F;
+}
+
+slides > slide {
+color: #FFFFFF;
+}
+
+slides > slide.title-slide aside.gdbar img {
+  width: 324px;
+  height: 78px;
+  position: absolute;
+  right: 0;
+  margin: 8px 15px;
+}
+
+slides > slide.title-slide hgroup {
+  right: 100px;
+  text-align: right;
+}
+
+
+slides > slide.title-slide p {
+  color: #ffffff;
+  text-align: right;
+}
+
+slides > slide.title-slide h1 {
+  color: #ffffff;
+  text-align: right;
+}
+
+slides > slide.backdrop {
+  background: #404040;
+}
+
+
+slides > slide:not(.nobackground):before {
+  width: 226.8px;
+  height: 54.6px;
+  background-size: 226.8px 54.6px;
+}
+
+slides > slide:not(.nobackground):after {
+  color: #FFFFFF;
+}
+
+
+h1 {
+    color: #ffffff;
+}
+
+h2 {
+    color: #ffffff;
+}
+
+h3 {
+    color: #ffffff;
+}
+
+h4 {
+    color: #ffffff;
+}
+
+p {
+    color: #ffffff;
+}
+
+th, td {
+    padding: 20px;
+    vertical-align: top;
+}
+
+ul li {
+  color: #ffffff;
+}
+
+.prettyprint {
+  background-color: #ffffff;
+}
