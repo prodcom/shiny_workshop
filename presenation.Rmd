@@ -293,6 +293,10 @@ bins <- seq(min(x), max(x), length.out = input$bins + 1)
 hist(x, breaks = bins, col = 'darkgray', border = 'white')     
 ```
 
+----
+<div align="center">
+<img src="shiny-cheatsheet-Reactivity.svg">
+</div>
 
 # Adding features
 
@@ -317,13 +321,9 @@ sidebarPanel(
 ## Adding a chart title in the server 
 Add this argument:
 ```{r, echo = TRUE, eval = FALSE}
-
 main = input$plottitle
-
 ```
 to this function:
 ```{r, echo = TRUE, eval = FALSE}
-
 hist(x, breaks = bins, col = 'darkgray', border = 'white')
-
 ```

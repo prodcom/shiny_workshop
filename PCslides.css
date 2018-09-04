@@ -94,20 +94,3 @@ ul li {
   color: #78a22f;
 }
 
-/* line 604, ../scss/default.scss */
-.prettyprint .lit {
-  /* a literal value */
-  color: #a52828;
-}
-
-/* line 609, ../scss/default.scss */
-.prettyprint .pun,
-.prettyprint .opn,
-.prettyprint .clo {
-  color: #265a9a;
-}
-
-/* line 618, ../scss/default.scss */
-.prettyprint .pln {
-  color: black;
-}
