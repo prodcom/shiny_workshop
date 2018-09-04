@@ -21,8 +21,8 @@ pacman::p_load(leaflet, plotly, shiny)
 ## Today's Workshop
 
  - What you can do with Shiny
- - Building a shiny app
- - Mastering reactive expressions
+ - Starting a shiny app
+ - Adding features
  - HTMLwidgets
  - Deployment
 
@@ -269,13 +269,61 @@ Servers are always a function of input and output
 server <- function(input, output) {}
 ```
 
-
-
-
-## R Output
-
-```{r cars}
-summary(cars)
+Get/assign inputs and output like named lists
+```{R, echo = TRUE, eval = FALSE}
+length.out = input$bins 
+output$distPlot <- renderPlot()
 ```
 
 
+## Server features
+
+A reactive plot wrapper
+```{R, echo = TRUE, eval = FALSE}
+output$distPlot <- renderPlot({})
+```
+
+A simple R chart
+```{R, echo = TRUE, eval = FALSE}
+# generate bins based on input$bins from ui.R
+x    <- faithful[, 2] 
+bins <- seq(min(x), max(x), length.out = input$bins + 1)
+      
+# draw the histogram with the specified number of bins
+hist(x, breaks = bins, col = 'darkgray', border = 'white')     
+```
+
+
+# Adding features
+
+## Adding a text input to the UI sidebar 
+Add this:
+```{r, echo = TRUE, eval = FALSE}
+textInput("plottitle", "Enter a title for the plot")
+```
+Here:
+```{r, echo = TRUE, eval = FALSE}
+sidebarPanel(
+         sliderInput("bins",
+                     "Number of bins:",
+                     min = 1,
+                     max = 50,
+                     value = 30), # < dont forget the comma
+         
+         ## ADD HERE ##
+      )
+```
+
+## Adding a chart title in the server 
+Add this argument:
+```{r, echo = TRUE, eval = FALSE}
+
+main = input$plottitle
+
+```
+to this function:
+```{r, echo = TRUE, eval = FALSE}
+
+hist(x, breaks = bins, col = 'darkgray', border = 'white')
+
+```

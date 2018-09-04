@@ -81,6 +81,33 @@ ul li {
   color: #ffffff;
 }
 
+
+/* Pretty print */
+
 .prettyprint {
   background-color: #ffffff;
+}
+
+/* line 600, ../scss/default.scss */
+.prettyprint .com {
+  /* a comment */
+  color: #78a22f;
+}
+
+/* line 604, ../scss/default.scss */
+.prettyprint .lit {
+  /* a literal value */
+  color: #a52828;
+}
+
+/* line 609, ../scss/default.scss */
+.prettyprint .pun,
+.prettyprint .opn,
+.prettyprint .clo {
+  color: #265a9a;
+}
+
+/* line 618, ../scss/default.scss */
+.prettyprint .pln {
+  color: black;
 }
