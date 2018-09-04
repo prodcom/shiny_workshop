@@ -298,6 +298,13 @@ hist(x, breaks = bins, col = 'darkgray', border = 'white')
 <img src="shiny-cheatsheet-Reactivity.svg">
 </div>
 
+----
+<div align="center" style="margin-top:-40px">
+<img src="shiny-cheatsheet-Outputs.svg">
+</div>
+
+
+
 # Adding features
 
 ## Adding a text input to the UI sidebar 
