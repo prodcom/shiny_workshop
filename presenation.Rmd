@@ -29,7 +29,7 @@ pacman::p_load(leaflet, plotly, shiny)
  
  Bonus material
  
- - HTMLwidgets
+ - HTML widgets
  - Deployment
  
 This presentation uses materials from [An introduction to Shiny](https://github.com/juliasilge/intro_to_shiny) and [the Shiny cheat sheet](https://shiny.rstudio.com/images/shiny-cheatsheet.pdf)
@@ -485,6 +485,7 @@ hist(x, breaks = bins, col = 'darkgray', border = 'white')
 
 ## What are HTML widgets?
 [HTML widgets](https://www.htmlwidgets.org/showcase_leaflet.html) create an R interface to popular Javascript libraries. HTML widgets add interactivity to:
+
  - Plots
  - Maps
  - Diagrams
@@ -494,13 +495,118 @@ hist(x, breaks = bins, col = 'darkgray', border = 'white')
 
 
 
-## Adding a plotly HTML widget
+## Remaking the app with plotly HTML widget
 
 Load the plotly package at the start of the app
 ```{r echo = TRUE, eval = FALSE}
 library(shiny)
 library(plotly) # < add this one
 ```
+
+
+
+
+## Editing the Server
+
+Change the render from plot to plotly
+```{r echo = TRUE, eval = FALSE}
+output$distPlot <- renderPlot({   # Change this
+output$distPlot <- renderPlotly({ # To this 
+```
+
+Assign the histogram to "h" and pass it to plotly
+```{r echo = TRUE, eval = FALSE}
+h <- hist(x, breaks = bins, col = 'darkgray', border = 'white', main = input$plottitle) ## Same as before but assigned
+      
+plot_ly(x = h$mids, y = h$counts) %>%
+  add_bars() %>%
+  layout(title = input$plottitle) ## A new plotly object
+```
+
+
+
+
+## Editing the UI
+
+Change the output from plot to plotly
+```{r echo = TRUE, eval = FALSE}
+plotOutput("distPlot")   # Change this
+plotlyOutput("distPlot") # To this 
+```
+
+
+
+
+##
+```{R OldFaithfulInteractive, eval = TRUE}
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+   
+   # Application title
+   titlePanel("Old Faithful Geyser Data"),
+   
+   # Sidebar with a slider input for number of bins 
+   sidebarLayout(
+      sidebarPanel(
+         sliderInput("bins",
+                     "Number of bins:",
+                     min = 1,
+                     max = 50,
+                     value = 30),
+         
+         textInput("plottitle", "Enter a title for the plot")
+         
+      ),
+      
+      # Show a plot of the generated distribution
+      mainPanel(
+         plotlyOutput("distPlot")
+      )
+   )
+)
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+   
+   output$distPlot <- renderPlotly({
+      # generate bins based on input$bins from ui.R
+      x    <- faithful[, 2] 
+      bins <- seq(min(x), max(x), length.out = input$bins + 1)
+      
+      # draw the histogram with the specified number of bins
+      h <- hist(x, breaks = bins, col = 'darkgray', border = 'white', main = input$plottitle)
+      
+      plot_ly(x = h$mids, y = h$counts) %>%
+        add_bars() %>%
+        layout(title = input$plottitle)
+      
+   })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
+```
+
+
+
+
+# Deployment
+
+## Your options
+
+ - Local host 
+ - Host on server
+ - Host on shinyapps.io
+
+Other ways to share
+
+ - Export your HTML widget to HTML
+ - [Package apps into standalone executables (experimental)](https://www.youtube.com/watch?v=ARrbbviGvjc)
+
+
+
+
 
 
 
