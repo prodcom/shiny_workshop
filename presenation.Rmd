@@ -18,25 +18,54 @@ pacman::p_load(leaflet, plotly, shiny)
 
 ```
 
-## Today's Workshop
 
- - What you can do with Shiny
+
+
+## Today's Workshop
+ - What is shiny?
+ - Inputs & outputs
  - Starting a shiny app
  - Adding features
+ 
+ Bonus material
+ 
  - HTMLwidgets
  - Deployment
+ 
+This presentation uses materials from [An introduction to Shiny](https://github.com/juliasilge/intro_to_shiny) and [the Shiny cheat sheet](https://shiny.rstudio.com/images/shiny-cheatsheet.pdf)
 
 
+
+
+# What is shiny?
+
+
+
+
+## A web application framework for R
+ - Lets useRs turn thier analysis into interactive web apps
+ - Shiny apps are run by a server, e.g.:
+    - Your computer
+    - Your work server
+    - Shinyapps.io
+   
+   
+   
+    
 # What can you do with Shiny?
 
-----
+
+
+
+##
 ```{r shiny}
+var.options <- names(iris)[!(names(iris) %in% "Species")]
 
 shinyApp(ui = pageWithSidebar(
   headerPanel('Iris k-means clustering'),
   sidebarPanel(
-    selectInput('xcol', 'X Variable', names(iris)),
-    selectInput('ycol', 'Y Variable', names(iris),
+    selectInput('xcol', 'X Variable', var.options),
+    selectInput('ycol', 'Y Variable', var.options,
                 selected=names(iris)[[2]]),
     numericInput('clusters', 'Cluster count', 3,
                  min = 1, max = 9)
@@ -73,7 +102,9 @@ server = function(input, output, session) {
 ```
 
 
-## 
+
+
+----
 <div style="margin-top:-90px">
 ```{r plotly}
 
@@ -90,6 +121,8 @@ plot_ly(z = ~volcano, width = 980, height = 700, showscale = FALSE) %>%
   
 
 ```
+
+
 
 
 ----
@@ -135,7 +168,22 @@ htmlwidgets::shinyRenderWidget(substitute(leaf), fullheight_leafletOutput, paren
 
 ```
 
-# Building a shiny app
+
+
+
+# Inputs & outputs
+
+
+
+
+## Reactive programming
+
+ - Typical R code is procedural or functional
+ - However, Shiny apps are reactive
+    - The reactive paradigm focuses on how data will flow through the code and how changes propogate
+
+
+
 
 ##{.build}
 
@@ -174,28 +222,48 @@ htmlwidgets::shinyRenderWidget(substitute(leaf), fullheight_leafletOutput, paren
  <td valign=top width="50%" style="text-align:center;padding:40px;">
   
   <p style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-  normal'><em>(A string of html)</em></p>
+  normal'><em>Recieves inputs</em></p>
   
   </td>
   
    <td valign=top width="50%" style="text-align:center;padding:40px;">
   
   <p style='margin-bottom:0cm;margin-bottom:.0001pt;line-height:
-  normal'><em>(An R function)</em></p>
+  normal'><em>Renders outputs</em></p>
   
   </td>
  
  </tr>
 </table>
 
+## Inputs
+<div align="center" style="margin-top:-30px">
+<img src="shiny-cheatsheet-Inputs.svg">
+</div>
+
+
+## Outputs
+<div align="center" style="margin-top:-30px">
+<img src="shiny-cheatsheet-Outputs.svg">
+</div>
+
+
+
+
+# Building a shiny app
 
 ## The shiny directory
-<div class="tg-wrap"><table><tr><td><strong style="background-color:#66bcdb;padding:10px">ui.r</strong></td><td>The user interface</td></tr><tr><td><strong style="background-color:#78a22f;padding:10px">server.r</strong></td><td>The server</td></tr><tr><td><strong style="background-color:#265a9a;padding:10px">global.r</strong></td><td>Defines objects available to UI and server</td></tr><tr><td><strong style="background-color:#f15a25;padding:10px">app.r</strong></td><td>Optional combination of UI and server</td></tr><tr><td><strong style="background-color:#8956a3;padding:10px">/www/</strong></td><td>UI assets (e.g. logo picture)</td></tr><tr><td><strong style="background-color:#a52828;padding:10px">...</strong></td><td>Additional files (e.g. datasets)</td></tr></table></div>
+<div class="tg-wrap" style="margin-top:-30px"><table><tr><td style="padding:13px"><strong style="background-color:#66bcdb;padding:10px">ui.r</strong></td><td style="padding:13px">The user interface</td></tr><tr><td style="padding:13px"><strong style="background-color:#78a22f;padding:10px">server.r</strong></td><td style="padding:13px">The server</td></tr><tr><td style="padding:13px"><strong style="padding:10px">OR</strong></td><td style="padding:13px"></td></tr><tr><td style="padding:13px"><strong style="background-color:#f15a25;padding:10px">app.r</strong></td><td style="padding:13px">Combination of UI and server</td></tr><tr><td style="padding:13px"><strong style="padding:10px">OPTIONAL:</strong></td><td style="padding:13px"></td></tr><tr><td style="padding:13px"><strong style="background-color:#265a9a;padding:10px">global.r</strong></td><td style="padding:13px">Defines objects available to UI and server</td></tr><tr><td style="padding:13px"><strong style="background-color:#8956a3;padding:10px">/www/</strong></td><td style="padding:13px">UI assets (e.g. logo picture)</td></tr><tr><td style="padding:13px"><strong style="background-color:#a52828;padding:10px">...</strong></td><td style="padding:13px">Additional files (e.g. datasets)</td></tr></table></div>
+
+
+
 
 ## Starting a new app
 
 <div style="width: 100%; height: 420px; overflow: hidden">
 <img src="Newproject_step1.PNG">
+
+
 
 
 ## Starting a new app
@@ -204,10 +272,14 @@ htmlwidgets::shinyRenderWidget(substitute(leaf), fullheight_leafletOutput, paren
 <img src="Newproject_step2.PNG" style="margin-top:-52%;margin-left:-80%">
 
 
+
+
 ## Starting a new app
 
 <div style="width: 100%; height: 420px; overflow: hidden">
 <img src="Newproject_step3.PNG" style="margin-top:-52%;margin-left:-80%">
+
+
 
 
 ## Starting a new app
@@ -216,10 +288,65 @@ htmlwidgets::shinyRenderWidget(substitute(leaf), fullheight_leafletOutput, paren
 <img src="Newproject_step4.PNG" style="margin-top:-52%;margin-left:-80%">
 
 
+
 ----
 
 <div style="width: 100%; height: 555px; margin-top:-25px; overflow: hidden">
 <img src="Newproject_step5.PNG" style="margin-top:-24.5%;">
+</div>
+
+
+
+
+##
+```{R OldFaithful, eval = TRUE}
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+   
+   # Application title
+   titlePanel("Old Faithful Geyser Data"),
+   
+   # Sidebar with a slider input for number of bins 
+   sidebarLayout(
+      sidebarPanel(
+         sliderInput("bins",
+                     "Number of bins:",
+                     min = 1,
+                     max = 50,
+                     value = 30)
+         
+      ),
+      
+      # Show a plot of the generated distribution
+      mainPanel(
+         plotOutput("distPlot")
+      )
+   )
+)
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+   
+   output$distPlot <- renderPlot({
+      # generate bins based on input$bins from ui.R
+      x    <- faithful[, 2] 
+      bins <- seq(min(x), max(x), length.out = input$bins + 1)
+      
+      # draw the histogram with the specified number of bins
+      hist(x, breaks = bins, col = 'darkgray', border = 'white')
+   })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+
+
+
+# Unpacking the code
+
+
 
 
 ## UI layout
@@ -229,10 +356,16 @@ The basic container for your UI
 ui <- fluidPage()
 ```
 
+
+
+
 A page title
 ```{R, echo = TRUE, eval = FALSE}
 titlePanel("Old Faithful Geyser Data")
 ```
+
+
+
 
 A page layout with a sidebar and a main panel
 ```{R, echo = TRUE, eval = FALSE}
@@ -241,6 +374,8 @@ sidebarLayout(
   mainPanel()
   )
 ```
+
+
 
 
 ## UI features
@@ -262,6 +397,8 @@ plotOutput(outputId = "distPlot")
 ```
 
 
+
+
 ## Server layout
 
 Servers are always a function of input and output
@@ -274,6 +411,8 @@ Get/assign inputs and output like named lists
 length.out = input$bins 
 output$distPlot <- renderPlot()
 ```
+
+
 
 
 ## Server features
@@ -293,15 +432,6 @@ bins <- seq(min(x), max(x), length.out = input$bins + 1)
 hist(x, breaks = bins, col = 'darkgray', border = 'white')     
 ```
 
-----
-<div align="center">
-<img src="shiny-cheatsheet-Reactivity.svg">
-</div>
-
-----
-<div align="center" style="margin-top:-40px">
-<img src="shiny-cheatsheet-Outputs.svg">
-</div>
 
 
 
@@ -325,6 +455,9 @@ sidebarPanel(
       )
 ```
 
+
+
+
 ## Adding a chart title in the server 
 Add this argument:
 ```{r, echo = TRUE, eval = FALSE}
@@ -334,3 +467,40 @@ to this function:
 ```{r, echo = TRUE, eval = FALSE}
 hist(x, breaks = bins, col = 'darkgray', border = 'white')
 ```
+
+
+
+
+----
+<div style="width: 100%; height: 500px; overflow: hidden">
+<div align="center">
+<img src="Modified_shinyapp.PNG" >
+</div>
+</div>
+
+
+
+
+#HTML widgets
+
+## What are HTML widgets?
+[HTML widgets](https://www.htmlwidgets.org/showcase_leaflet.html) create an R interface to popular Javascript libraries. HTML widgets add interactivity to:
+ - Plots
+ - Maps
+ - Diagrams
+ - Tables
+ - & much more
+
+
+
+
+## Adding a plotly HTML widget
+
+Load the plotly package at the start of the app
+```{r echo = TRUE, eval = FALSE}
+library(shiny)
+library(plotly) # < add this one
+```
+
+
+
