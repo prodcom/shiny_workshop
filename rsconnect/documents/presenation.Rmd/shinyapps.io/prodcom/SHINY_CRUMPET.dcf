@@ -5,8 +5,8 @@ account: prodcom
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 420492
-bundleId: 1570211
+bundleId: 1571761
 url: https://prodcom.shinyapps.io/SHINY_CRUMPET/
-when: 1536132581.64177
+when: 1536197901.88817
 asMultiple: FALSE
 asStatic: FALSE
