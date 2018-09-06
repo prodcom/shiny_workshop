@@ -11,11 +11,13 @@ runtime: shiny
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
 
-if(!require(pacman)) install.packages("pacman")
-pacman::p_load(leaflet, plotly, shiny)
+library(leaflet)
+library(plotly)
+library(shiny)
+library(knitr)
 
+opts_chunk$set(echo = FALSE)
 ```
 
 
@@ -185,7 +187,7 @@ htmlwidgets::shinyRenderWidget(substitute(leaf), fullheight_leafletOutput, paren
 
 
 
-##{.build}
+## {.build}
 
 <p style="text-align: center;"><strong><span style="font-size: 40.0pt; line-height: 107%;">shinyApp( <span style="color: #66bcdb;">ui</span> , <span style="color: #78a22f;">server</span>)</span></strong></p>
 
@@ -481,7 +483,10 @@ hist(x, breaks = bins, col = 'darkgray', border = 'white')
 
 
 
-#HTML widgets
+# HTML widgets
+
+
+
 
 ## What are HTML widgets?
 [HTML widgets](https://www.htmlwidgets.org/showcase_leaflet.html) create an R interface to popular Javascript libraries. HTML widgets add interactivity to:
