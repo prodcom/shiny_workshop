@@ -1,0 +1,12 @@
+name: SHINY_CRUMPET
+title: SHINY_CRUMPET
+username:
+account: prodcom
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 420492
+bundleId: 1570211
+url: https://prodcom.shinyapps.io/SHINY_CRUMPET/
+when: 1536132581.64177
+asMultiple: FALSE
+asStatic: FALSE
