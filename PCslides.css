@@ -9,7 +9,9 @@ background: #78A22F;
 }
 
 slides > slide {
-color: #FFFFFF;
+  color: #FFFFFF;
+  background: #404040 ;
+  background-color: #404040;
 }
 
 slides > slide.title-slide aside.gdbar img {
@@ -36,8 +38,9 @@ slides > slide.title-slide h1 {
   text-align: right;
 }
 
-slides > slide.backdrop {
-  background: #404040;
+slides > .backdrop {
+  background: #404040 ;
+  background-color: #404040;
 }
 
 
